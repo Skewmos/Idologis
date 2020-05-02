@@ -1,0 +1,23 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-4">{{ form_row(form.name) }}</div>
+    <div class="col-md-4">{{ form_row(form.surface) }}</div>
+    <div class="col-md-4">{{ form_row(form.surfaceTer) }}</div>
+</div>
+<div class="row">
+    <div class="col-md-4">{{ form_row(form.rooms) }}</div>
+    <div class="col-md-4">{{ form_row(form.bedrooms) }}</div>
+    <div class="col-md-4">{{ form_row(form.energy_class) }}</div>
+</div>
+<div class="row">
+    <div class="col-md-5">{{ form_row(form.adress) }}</div>
+    <div class="col-md-3">{{ form_row(form.zip_code) }}</div>
+    <div class="col-md-2">{{ form_row(form.sold) }}</div>
+</div>
+<div class="row">
+    <div class="col-md-12">{{ form_row(form.description) }}</div>
+</div>
+{{ form_widget(form) }}
+<button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
+{{ form_end(form) }}
+

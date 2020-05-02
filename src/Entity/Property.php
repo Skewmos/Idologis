@@ -14,6 +14,7 @@ class Property
         0 => "electric",
         1 => "gaz"
     ];
+    const ENERGY = ["A", "B", "C", "D", "E", "F", "G"];
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title 'Idologis | admin : édition' %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="jumbotron">
+            <h2 class="text-center">Editer le bien</h2>
+        </div>
+       {{  include('admin/property/_form.html.twig', {form: form, button: 'Editer'}) }}
+    </div>
+{% endblock %}
+
+
+
+
