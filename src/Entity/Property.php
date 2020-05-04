@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
- * @UniqueEntity("name)
+ * @UniqueEntity("name")
  */
 class Property
 {
@@ -38,7 +38,7 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Range(min="5", max="1000")
+     * @Assert\Range(min=5, max=1000)
      */
     private $surface;
 
