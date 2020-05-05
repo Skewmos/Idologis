@@ -6,15 +6,20 @@
     <!-- Style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/solar/bootstrap.min.css" rel="stylesheet" integrity="sha384-Ya0fS7U2c07GI3XufLEwSQlqhpN0ri7w/ujyveyqoxTJ2rFHJcT6SUhwhL7GM4h9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
 </head>
 {% block stylesheets %}{% endblock %}
 <body>
 {% include('/partials/_adminNav.html.twig') %}
 {% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
+<script>
+    $('select').select2();
+</script>
+{% block javascripts %}{% endblock %}
 </body>
 </html>

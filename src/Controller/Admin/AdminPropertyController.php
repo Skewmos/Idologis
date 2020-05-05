@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin;
 
+use App\Entity\Option;
 use App\Entity\Property;
 use App\Entity\Rental;
 use App\Entity\Sale;
@@ -82,6 +83,7 @@ class AdminPropertyController extends AbstractController
      */
     public function  edit(Property $property, Request $request)
     {
+
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
