@@ -2,6 +2,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Property;
+use App\Entity\Rental;
+use App\Entity\Sale;
 use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -52,6 +54,17 @@ class AdminPropertyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($property);
             $this->em->flush();
+            if ($property->getType() == 0) {
+                $sale = new Sale();
+                $sale->setReference($property->getId());
+                $this->em->persist($sale);
+                $this->em->flush();
+            }else if ($property->getType() == 1) {
+                $rental = new Rental();
+                $rental->setReference($property->getId());
+                $this->em->persist($rental);
+                $this->em->flush();
+            }
             $this->addFlash('success', "Bien créer avec succés");
             return $this->redirectToRoute('admin.property.index');
         }

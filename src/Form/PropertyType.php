@@ -13,19 +13,26 @@ class PropertyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', null, ["required" => true])
             ->add('description')
             ->add('surface')
             ->add('surfaceTer')
             ->add('rooms')
             ->add('bedrooms')
             ->add('energy_class', ChoiceType::class, [
-                "choices" => $this->getChoices()
+                "choices" => $this->getChoices(Property::ENERGY)
             ])
             ->add('adress')
             ->add('zip_code')
             ->add('sold')
-        ;
+            ->add('city')
+            ->add('price')
+            ->add('type', ChoiceType::class, [
+                "choices" => $this->getChoices(Property::TYPE)
+            ])
+            ->add('heat', ChoiceType::class, [
+                "choices" => $this->getChoices(Property::HEAT)
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -36,9 +43,9 @@ class PropertyType extends AbstractType
         ]);
     }
 
-    private function getChoices()
+    private function getChoices(array $tab)
     {
-        $choices = Property::ENERGY;
+        $choices = $tab;
         $output = [];
         foreach ($choices as $k => $v) {
             $output[$v] = $k;

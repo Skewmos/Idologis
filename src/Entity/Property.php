@@ -18,6 +18,7 @@ class Property
         1 => "gaz"
     ];
     const ENERGY = ["A", "B", "C", "D", "E", "F", "G"];
+    const TYPE = ["vente", "location"];
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -87,6 +88,26 @@ class Property
      * @ORM\Column(type="boolean", options={"default": false})
      */
     private $sold = false;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $heat;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $price;
 
     public function getId(): ?int
     {
@@ -225,6 +246,54 @@ class Property
     public function setSold(bool $sold): self
     {
         $this->sold = $sold;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getHeat(): ?string
+    {
+        return $this->heat;
+    }
+
+    public function setHeat(string $heat): self
+    {
+        $this->heat = $heat;
+
+        return $this;
+    }
+
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    public function setType(int $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
