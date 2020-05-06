@@ -6,47 +6,26 @@
         <!-- Style -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
     </head>
         {% block stylesheets %}{% endblock %}
     <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-        <div class="container">
-            <a class="navbar-brand" href="{{ path('home') }}">
-                <img src="../style/img/logo1.png" alt="" style="width:84px; height: 84px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('home') }}">ACCUEIL
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if current_menu is defined and current_menu == 'properties' %} active{% endif %}" href="{{ path('property.index') }}">Achat/Location</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./rentals.php">LOCATIONS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./contact.php">CONTACT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./login.php">CONNEXION</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    {% if (app.request.attributes.get('_route')  == "home") %}
+        {% include('partials/_homeNav.html.twig') %}
+    {% else %}
+        {% include('partials/_nav.html.twig') %}
+    {% endif %}
+
 
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
+    <script>
+        $('select').select2();
+    </script>
+    {% block javascripts %}{% endblock %}
     </body>
 </html>
