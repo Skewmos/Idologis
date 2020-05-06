@@ -1,0 +1,24 @@
+{% extends 'adminBase.html.twig' %}
+{% block title 'Idologis | admin : édition' %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="jumbotron">
+            <h2 class="text-center">Editer  L'option</h2>
+        </div>
+       {{  include('admin/option/_form.html.twig', {button: 'Editer'}) }}
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
+{%  endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
+    <script>
+        $('select').select2();
+    </script>
+{% endblock %}
+
+
+
