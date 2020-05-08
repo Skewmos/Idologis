@@ -1,34 +1,185 @@
 {%  extends 'base.html.twig' %}
 {% block title 'Idologis | home' %}
- {% block body %}
-<div class="container">
- <div class="jumbotron text-center">
-  <h1>PROJET IMMOBILIER, PROJET DE VIE</h1>
-  <h3>BIENVENUE SUR NOTRE PLATEFORME</h3>
- </div>
- <div class="container">
-  <h2>Les derniers biens</h2>
-  <div class="row flex">
-      {% dump(properties) %}
-   {% for property in properties %}
-     <div class="col-4">
-      <div class="card">
-          {%  if property.filename %}
-              <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb') }}" alt="" class="card-img-top">
-          {% else %}
-              <img src="{{ '/images/properties/empty.jpg' | imagine_filter('thumb') }}" alt="">
-          {% endif %}
-        <div class="card-body">
-          <h5 class="card-title">
-           <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.name }}</a>
-          </h5>
-         <p class="card-text"> {{ property.ZipCode }} </p>
-        </div>
-      </div>
-     </div>
-   {% endfor %}
-  </div>
- </div>
-</div>
 
+{% block body %}
+    <!-- Hero Section Begin -->
+    <section class="hero-section">
+        <div class="hero-items owl-carousel">
+            {% for property in properties %}
+                <div class="single-hero-item set-bg" data-setbg="{%  if property.filename %}  {{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium') }} {% else %} {{ '/images/empty.jpg' | imagine_filter('medium') }} {% endif %} ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2">
+                                <div class="hero-text">
+                                    <p class="room-location"><i class="icon_pin"></i> {{ property.adress }}</p>
+                                    <h2>{{ property.name }}</h2>
+                                    <div class="room-price">
+                                        <span>Prix</span>
+                                        <p>{{ property.getFormatPrice }} € {% if property.type == 0 %} TTC {% else %} Par mois {% endif %}</p>
+                                    </div>
+                                    <ul class="room-features">
+                                        <li>
+                                            <i class="fa fa-arrows-alt"></i>
+                                            <p>{{ property.surface }} m²</p>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-bed"></i>
+                                            <p>{{ property.bedrooms }} chambre(s)</p>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-home"></i>
+                                            <p>{{ property.rooms }} piéces</p>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-charging-station"></i>
+                                            <p>{{ energy[property.energyClass] }} classe energie</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="thumbnail-pic">
+            <div class="thumbs owl-carousel">
+                {% for property in properties %}
+                    <div class="item">
+                        {%  if property.filename %}
+                            <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium') }}" alt="">
+                        {% else %}
+                            <img src="{{ '/images/empty.jpg' | imagine_filter('medium') }}" alt="">
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- How It Works Section Begin -->
+    <section class="howit-works spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>TROUVEZ VOTRE LOGEMENT DE RÊVE</span>
+                        <h2>Comment ça marche</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="single-howit-works">
+                        <img src="/images/howit-works/howit-works-1.png" alt="">
+                        <h4>Rechercher et trouver un logement</h4>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="single-howit-works">
+                        <img src="/images/howit-works/howit-works-2.png" alt="">
+                        <h4>Trouver un endroit</h4>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="single-howit-works">
+                        <img src="/images/howit-works/howit-works-3.png" alt="">
+                        <h4>Parlez à votre agent</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- How It Works Section End -->
+
+    <!-- Feature Section Begin -->
+    <section class="feature-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Liste réalisé par nos agent</span>
+                        <h2>Propriété far</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="feature-carousel owl-carousel">
+                    {% for property in last %}
+                        {%  include 'property/_property.hmtl.twig'%}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature Section End -->
+
+    <!-- Top Properties Section Begin -->
+    <div class="top-properties-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="properties-title">
+                        <div class="section-title">
+                            <span>LA MEILLEURE PROPRIÉTÉ POUR VOUS</span>
+                            <h2>Meilleurs propriétés</h2>
+                        </div>
+                        <a href="{{ path('property.index') }}" class="top-property-all">Voir tous les biens</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="top-properties-carousel owl-carousel">
+            {% for property in properties %}
+                    <div class="single-top-properties">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="stp-pic">
+                                {%  if property.filename %}
+                                    <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium') }}" alt="">
+                                {% else %}
+                                    <img src="{{ '/images/empty.jpg' | imagine_filter('medium') }}" alt="">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="stp-text">
+                                <div class="s-text btn {% if property.type == 0 %} btn-info {% else %} btn-warning  {% endif %}">{{ type[property.type] }}</div>
+                                <h2>{{ property.name }}</h2>
+                                <div class="room-price">
+                                    <h4 class="price">{{ property.getFormatPrice }} € <span>{% if property.type == 0 %} TTC {% else %} Par mois {% endif %}</span></h4>
+                                </div>
+                                <div class="properties-location"><i class="icon_pin"></i>{{ property.adress }}</div>
+                                <p>{{ property.description }}</p>
+                                <ul class="room-features">
+                                    <li>
+                                        <i class="fa fa-arrows-alt"></i>
+                                        <p>{{ property.surface }} m²</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-bed"></i>
+                                        <p>{{ property.bedrooms }} chambre(s)</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-home"></i>
+                                        <p>{{ property.rooms }} piéces</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-charging-station"></i>
+                                        <p>{{ energy[property.energyClass] }} classe energie</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top Properties Section End -->
  {% endblock %}

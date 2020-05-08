@@ -65,6 +65,17 @@ class PropertyRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Property[]
+     */
+    public  function findTwelve(): array
+    {
+        return $this->findVisibleQuery()
+            ->setMaxResults(12)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @return QueryBuilder
      */
     private function findVisibleQuery(): QueryBuilder

@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
+body,
+html,
+header,
+section,
+h1 {
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans', sans-serif; }
+
+header,
+body,
+html {
+    width: 100%;
+    height: 100%; }
+
+header {
+    background-image: url("../images/background.jpg");
+    background-size: cover; }
+
+.container-fluid {
+    margin: 0;
+    padding: 0; }
+
+.index-img {
+    height: 1080px;
+    width: 100%; }
+
+a {
+    text-align: center;
+    font-family: Tahoma;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    opacity: 1;
+    color: #FFFFFF !important; }
+
+.wrapper {
+    display: table;
+    width: 100%;
+    height: 100%; }
+
+.content {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle; }
+
+i {
+    color: #FFFFFF;
+    opacity: 1;
+    font-size: 34px; }
+
+h1 {
+    text-align: center;
+    font-family: Tahoma;
+    letter-spacing: 9.6px;
+    color: #FFFFFF;
+    font-size: 45px;
+    opacity: 1; }
+
+h3 {
+    text-align: center;
+    font-family: Tahoma;
+    letter-spacing: 5.57px;
+    color: #FFFFFF;
+    font-size: 20px;
+    padding: 50px;
+    opacity: 1; }
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px; }
+
+* Bottom left text */
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
+
+/* Top left text */
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+}
+
+/* Top right text */
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+}
+
+/* Centered text */
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

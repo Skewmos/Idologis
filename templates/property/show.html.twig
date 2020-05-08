@@ -1,52 +1,95 @@
 {% extends 'base.html.twig' %}
 {% block title property.name %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/home.css">
+{% endblock %}
 {% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 px-0 mt-0">
+                <div class="menu">
+                    <a href="{{ path('property.index') }}" class="btn btn-danger top-left "><i class="fas fa-arrow-left" style="font-size: 20px;"></i> Précédent</a>
+                </div>
+                {%  if property.filename %}
+                    <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium') }}" alt="" class="card-img-top">
+                {% else %}
+                    <img src="{{ '/images/empty.jpg' | imagine_filter('medium') }}" alt="" class="card-img-top">
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <h3 class="text-dark">Les options </h3>
+                <ul class="list-group">
+                {% for option in property.options %}
+                    <li class="list-group-item"> {{ option.name }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-12 jumbotron py-4" style="background-color: #161616;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 offset-md-2">
+                            <p class="text-white font-weight-bold">{{ property.name }}</p>
+                            <p class="text-white">{{ property.FormatPrice }} €{% if property.type == 0 %} TTC {% else %} Par mois {% endif %}</p>
+                        </div>
+                        <div class="col-md-6 text-center text-white">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <i class="fas fa-chart-area"></i>
+                                    <p>Surfaces <br> {{ property.surface }} m²</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <i class="fas fa-bed"></i>
+                                    <p>Chambres <br> {{ property.bedrooms }}</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <i class="fas fa-home"></i>
+                                    <p>Piéces <br> {{ property.rooms }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container mt-4">
        <div class="row">
-           <div class="col-md-8">
-
+           <div class="col-md-12 mb-4">
+               <a href="#" class="btn btn-info float-right">Contacter l'agence</a>
            </div>
-           <div class="col-md-4">
-               <h1>{{ property.name }}</h1>
-               <h2>{{ property.rooms }} piéces  - {{ property.surface }} m²</h2>
-               <a href="#" class="btn btn-info">Contacter l'agence</a>
-           </div>
-
            <p>
                {{ property.description | nl2br }}
            </p>
-
-           <div class="row">
-               <div class="col-md-8">
-                   <h2>Caractéristiques</h2>
-                   <table class="table-striped">
-                       <tr>
-                           <td>Surface habitable</td>
-                           <td>{{ property.surface }}</td>
-                       </tr>
-                       <tr>
-                           <td>Surface du terrain</td>
-                           <td>{{ property.surfaceTer }}</td>
-                       </tr>
-                       <tr>
-                           <td>Nombre de piéces</td>
-                           <td>{{ property.rooms }}</td>
-                       </tr>
-                       <tr>
-                           <td>Nombre de chambre</td>
-                           <td>{{ property.bedrooms }}</td>
-                       </tr>
-                       <tr>
-                           <td>Classe énergitique</td>
-                           <td>{{ property.surface }}</td>
-                       </tr>
-                   </table>
-               </div>
-               <div class="col-md-4">
-                   <h2>Spécificité</h2>
-               </div>
-           </div>
        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Caractéristiques</h2>
+                <table class="table-striped">
+                    <tr>
+                        <td>Surface habitable</td>
+                        <td>{{ property.surface }}</td>
+                    </tr>
+                    <tr>
+                        <td>Surface du terrain</td>
+                        <td>{{ property.surfaceTer }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre de piéces</td>
+                        <td>{{ property.rooms }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre de chambre</td>
+                        <td>{{ property.bedrooms }}</td>
+                    </tr>
+                    <tr>
+                        <td>Classe énergitique</td>
+                        <td>{{ property.surface }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
