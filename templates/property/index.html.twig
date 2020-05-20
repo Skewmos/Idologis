@@ -1,40 +1,56 @@
 {%  extends 'base.html.twig' %}
 {% block title 'Idologis | Tous nos bien' %}
  {% block body %}
-     <div class="container-fluid mt-4">
-         {{ form_start(form) }}
-         <div class="form-row align-items-end">
-             <div class="col">
-                 {{ form_row(form.minSurface) }}
-             </div>
-             <div class="Col">
-                 {{ form_row(form.maxPrice) }}
-             </div>
-             <div class="Col">
-                 {{ form_row(form.options) }}
-             </div>
-             <div class="col">
-                <div class="form-group">
-                    <button class="btn btn-primary">Rechercher</button>
-                </div>
-             </div>
-         </div>
-         {{ form_end(form) }}
-     </div>
-     <div class="container">
+     <div class="container-fluid px-0">
          <div class="jumbotron text-center">
             <h3>Voir tous nos bien</h3>
          </div>
-   <div class="row">
-       {% for property in properties%}
-           <div class="col-md-4">
-               {%  include 'property/_property.hmtl.twig'%}
-           </div>
-       {% endfor %}
-   </div>
-         <div class="pagination">
-             {{ knp_pagination_render(properties) }}
+     </div>
+         {% include 'partials/_search.html.twig' %}
+     <div class="container-fluid mt-5 ">
+            <div class="row">
+            {% for property in properties%}
+                <div class="col-12 col-sm-6 col-md-3  mb-3">
+                    <div class="card">
+                        {%  if property.filename %}
+                            <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb') }}" alt="" class="card-img-top">
+                        {% else %}
+                            <img src="{{ '/images/empty.jpg' | imagine_filter('thumb') }}" alt="" class="card-img-top">
+                        {% endif %}
+                        <div class="card-body my-1" style="height: 200px;">
+                            <h6 class="card-title text-center">{{ property.name }}</h6>
+                            <p class="card-text"> <i class="fas fa-map-marker-alt" style="color: #2cbdb8;"></i> {{ property.adress}}</p>
+                            <h6>{{ property.getFormatPrice }} € <span>{% if property.type == 0 %} TTC {% else %} Par mois {% endif %}</span></h6>
+                            <a href="{{ path('property.show', {slug: property.slug, id: property.id}) }}" class="btn btn-primary mt-3">Voir le bien</a>
+                        </div>
+                        <div class="card-body bg-dark">
+                                <div class="row text-center">
+                                    <div class="col-md-4">
+                                        <i class="fa fa-arrows-alt" style="color: #2cbdb8;"></i>
+                                        <p class="text-white">{{ property.surface }} m²</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                         <i class="fa fa-bed" style="color: #2cbdb8;"></i>
+                                         <p class="text-white">{{ property.bedrooms }}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fa fa-home" style="color: #2cbdb8;" ></i>
+                                        <p class="text-white">{{ property.rooms }}</p>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
          </div>
      </div>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <div class="pagination mb-5 mt-5">
+                    {{ knp_pagination_render(properties) }}
+                </div>
+            </div>
+        </div>
+    </div>
  {% endblock %}

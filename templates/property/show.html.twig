@@ -1,15 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block title property.name %}
-{% block stylesheets %}
-    <link rel="stylesheet" href="/css/home.css">
-{% endblock %}
 {% block body %}
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 px-0 mt-0">
                 <div class="menu">
-                    <a href="{{ path('property.index') }}" class="btn btn-danger top-left "><i class="fas fa-arrow-left" style="font-size: 20px;"></i> Précédent</a>
+                    <a href="{{ path('property.index') }}" class="btn btn-danger float-left "><i class="fas fa-arrow-left" style="font-size: 20px;"></i> Précédent</a>
                 </div>
                 {%  if property.filename %}
                     <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium') }}" alt="" class="card-img-top">
@@ -18,14 +14,46 @@
                 {% endif %}
             </div>
             <div class="col-md-4">
-                <h3 class="text-dark">Les options </h3>
+                    <h2 class="text-center mb-3">Caractéristiques</h2>
+                <div class="table-responsive">
+                    <table class="table  table-striped">
+                        <tr>
+                            <td>Surface habitable</td>
+                            <td>{{ property.surface }} m²</td>
+                        </tr>
+                        <tr>
+                            <td>Surface du terrain</td>
+                            <td>{{ property.surfaceTer }} m²</td>
+                        </tr>
+                        <tr>
+                            <td>Type de Chaufage </td>
+                            <td>{{ heat[property.heat] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Classe énergitique</td>
+                            <td>{{ energy[property.energyClass] }}</td>
+                        </tr>
+                    </table>
+                </div>
+                {% if property.options is not empty %}
+                <h2 class="text-center mb-3">Les options </h2>
                 <ul class="list-group">
-                {% for option in property.options %}
-                    <li class="list-group-item"> {{ option.name }}</li>
-                {% endfor %}
+                    {% for option in property.options %}
+                        <li class="list-group-item"> {{ option.name }}</li>
+                    {% endfor %}
                 </ul>
+                {% endif %}
+                <a href="#" class="btn btn-info float-right mb-4">Contacter l'agence</a>
+                <p class="mt-5"> Déscription : <br>{{ property.description | nl2br }}</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-1">
+                            <img src="{{ '/images/left.png' | imagine_filter('medium') }}" alt="energy class" class="mb-3 mt-3">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-12 jumbotron py-4" style="background-color: #161616;">
+            <div class="col-md-12 jumbotron py-4 mb-0" style="background-color: #161616;">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 offset-md-2">
@@ -50,44 +78,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container mt-4">
-       <div class="row">
-           <div class="col-md-12 mb-4">
-               <a href="#" class="btn btn-info float-right">Contacter l'agence</a>
-           </div>
-           <p>
-               {{ property.description | nl2br }}
-           </p>
-       </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Caractéristiques</h2>
-                <table class="table-striped">
-                    <tr>
-                        <td>Surface habitable</td>
-                        <td>{{ property.surface }}</td>
-                    </tr>
-                    <tr>
-                        <td>Surface du terrain</td>
-                        <td>{{ property.surfaceTer }}</td>
-                    </tr>
-                    <tr>
-                        <td>Nombre de piéces</td>
-                        <td>{{ property.rooms }}</td>
-                    </tr>
-                    <tr>
-                        <td>Nombre de chambre</td>
-                        <td>{{ property.bedrooms }}</td>
-                    </tr>
-                    <tr>
-                        <td>Classe énergitique</td>
-                        <td>{{ property.surface }}</td>
-                    </tr>
-                </table>
             </div>
         </div>
     </div>
