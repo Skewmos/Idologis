@@ -1,18 +1,65 @@
 {%  extends 'adminBase.html.twig' %}
 {% block title 'Idologis | Gestion des biens' %}
+
  {% block body %}
+     {{ dump(count) }}
+     <div class="container">
+         <div class="row">
+             <div class="col-xl-3 col-md-6 mb-4 mt-5">
+                 <div class="card border-left-primary bg-info">
+                     <div class="card-header">
+                         <h5 class="text-center text-white">Bien total : <br><span class="mt-2">{{ count[0][1] }}</span> </h5>
+
+                     </div>
+                     <div class="card-bordy">
+                     </div>
+                 </div>
+             </div>
+             <div class="col-xl-3 col-md-6 mb-4 mt-5">
+                 <div class="card border-left-primary bg-success">
+                     <div class="card-header">
+                         <h5 class="text-center text-white">Ventes : <br><span class="mt-2">{{ count[1][0][1] }}</span></h5>
+                     </div>
+                     <div class="card-bordy">
+                     </div>
+                 </div>
+             </div>
+             <div class="col-xl-3 col-md-6 mb-4 mt-5">
+                 <div class="card border-left-primary bg-warning">
+                     <div class="card-header">
+                         <h5 class="text-center text-white">Locations : <br><span class="mt-2">{{ count[2][0][1] }}</span></h5>
+                     </div>
+                     <div class="card-bordy">
+                     </div>
+                 </div>
+             </div>
+
+             <div class="col-xl-3 col-md-6 mb-4 mt-5">
+                 <div class="card border-left-primary bg-danger">
+                     <div class="card-header">
+                         <h5 class="text-center text-white">Biens vendu ou louer : <br><span class="mt-2">{{ count[3][0][1] }}</span></h5>
+                     </div>
+                     <div class="card-bordy">
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
      <div class="container mt-4">
-         <h1>Gérer les biens</h1>
+         <h1 class="text-dark">Gérer les biens</h1>
         {%  for message in app.flashes('success') %}
             <div class="alert alert-success">
                 {{ message }}
              </div>
          {% endfor %}
          <table class="table table-striped">
+             <div class="text-right mb-4">
+                 <a href="{{ path('admin.property.new') }}" class="btn btn-primary"><i class="fas fa-plus-square"></i> Créer un nouveau bien</a>
+             </div>
              <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>Action</th>
+                    <th class="text-white">Nom</th>
+                    <th class="text-white">Action</th>
                 </tr>
              </thead>
              <tbody>
@@ -32,9 +79,6 @@
              {% endfor %}
              </tbody>
          </table>
-         <div class="text-right">
-             <a href="{{ path('admin.property.new') }}" class="btn btn-primary"><i class="fas fa-plus-square"></i> Créer un nouveau bien</a>
-         </div>
      </div>
 
  {% endblock %}
