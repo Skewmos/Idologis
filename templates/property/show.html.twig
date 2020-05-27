@@ -2,6 +2,16 @@
 {% block title property.name %}
 {% block body %}
     <div class="container-fluid">
+        {%  for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% if not form.vars.valid %}
+            <div class="aler alert-danger">
+                Vous avez commis une erreur en remplissant le formulaire veuillez la modifier avant de le renvoyer!
+            </div>
+        {% endif %}
         <div class="row">
             <div class="col-md-8 px-0 mt-0">
                 <div class="menu">
@@ -13,7 +23,7 @@
                     <img src="{{ '/images/empty.jpg' | imagine_filter('medium') }}" alt="" class="card-img-top">
                 {% endif %}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 ">
                     <h2 class="text-center mb-3">Caractéristiques</h2>
                 <div class="table-responsive">
                     <table class="table  table-striped">
@@ -44,6 +54,22 @@
                 </ul>
                 {% endif %}
                 <a href="#" class="btn btn-info float-right mb-4">Contacter l'agence</a>
+                <div id="contactForm" class="mt-5 container">
+                    {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col">{{ form_row(form.firstname) }}</div>
+                            <div class="col">{{ form_row(form.lastname) }}</div>
+                        </div>
+                        <div class="row">
+                        <div class="col">{{ form_row(form.phone) }}</div>
+                        <div class="col">{{ form_row(form.email) }}</div>
+                    </div>
+                        {{ form_rest(form) }}
+                    <div class="form-group">
+                        <button class="btn btn-primary">Envoyer</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
                 <p class="mt-5"> Déscription : <br>{{ property.description | nl2br }}</p>
                 <div class="container">
                     <div class="row">
