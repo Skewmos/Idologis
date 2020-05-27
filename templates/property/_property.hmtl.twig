@@ -1,11 +1,36 @@
-<div class="card mb-4">
-    <div class="card-body">
-        <h5 class="card-title">
-            <a href="{{ path('property.show', {slug: property.slug, id: property.id}) }}">{{ property.name }}</a>
-        </h5>
-        <p class="card-text">{{ property.surface }} m² -{{ property.city }} ({{ property.zipCode }})</p>
-        <div class="text-primary">
-            {{ property.price }} €
+<div class="col-lg-4">
+    <div class="feature-item">
+        <div class="fi-pic set-bg" data-setbg="{%  if property.filename %}  {{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium') }} {% else %} {{ '/images/empty.jpg' | imagine_filter('medium') }} {% endif %} ">
+            <div class="pic-tag">
+                <div class="s-text btn {% if property.type == 0 %} btn-info {% else %} btn-warning  {% endif %}">{{ type[property.type] }}</div>
+            </div>
+        </div>
+        <div class="fi-text">
+            <div class="inside-text mt-0 mb-0">
+                <h5 class=" font-weight-bold">{{ property.name }}</h5>
+                <ul>
+                    <li><i class="fa fa-map-marker"></i> {{ property.adress }}</li>
+                </ul>
+                <h5 class="price">{{ property.getFormatPrice }} € <span>{% if property.type == 0 %} TTC {% else %} Par mois {% endif %}</span></h5>
+            </div>
+            <ul class="room-features">
+                <li>
+                    <i class="fa fa-arrows-alt"></i>
+                    <p>{{ property.surface }} m²</p>
+                </li>
+                <li>
+                    <i class="fa fa-bed"></i>
+                    <p>{{ property.bedrooms }} chambre(s)</p>
+                </li>
+                <li>
+                    <i class="fa fa-home"></i>
+                    <p>{{ property.rooms }} piéces</p>
+                </li>
+                <li>
+                    <i class="fa fa-charging-station"></i>
+                    <p>{{ energy[property.energyClass] }} classe energie</p>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

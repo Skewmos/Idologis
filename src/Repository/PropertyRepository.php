@@ -65,6 +65,65 @@ class PropertyRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Property[]
+     */
+    public  function findTwelve(): array
+    {
+        return $this->findVisibleQuery()
+            ->setMaxResults(12)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return array
+     */
+    public function count_all(): array
+    {
+        return($this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->where('p.sold = false')
+            ->getQuery()
+            ->getResult());
+    }
+
+    /**
+     * @return array
+     */
+    public function count_all_sale(): array
+    {
+        return($this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->andwhere('p.sold = false')
+            ->andWhere('p.type = 0')
+            ->getQuery()
+            ->getResult());
+    }
+
+    /**
+     * @return array
+     */
+    public function count_all_rental(): array
+    {
+        return($this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->andwhere('p.sold = false')
+            ->andWhere('p.type = 1')
+            ->getQuery()
+            ->getResult());
+    }
+    /**
+     * @return array
+     */
+    public function count_unavailable(): array
+    {
+        return($this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->andwhere('p.sold = true')
+            ->getQuery()
+            ->getResult());
+    }
+    /**
      * @return QueryBuilder
      */
     private function findVisibleQuery(): QueryBuilder

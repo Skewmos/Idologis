@@ -1,7 +1,8 @@
-{%  extends 'base.html.twig' %}
+{%  extends 'simple.html.twig' %}
 {% block title 'Idologis | Connexion' %}
  {% block body %}
   <div class="container mt-5">
+      <h2 class="text-center mb-3">Connexion</h2>
       <div class="row">
           <div class="col-md-4 offset-md-4">
               {% if error %}
@@ -26,6 +27,9 @@
       </div>
        <button type="submit" class="btn btn-primary">Se connecter</button>
      </form>
+        <div class="col-md-12">
+            <small><a href="{{ path('home') }}" class="float-right text-right"><i class="fas fa-undo 2x"></i> Retour à l'accueil</a></small>
+        </div>
     </div>
    </div>
   </div>

@@ -8,6 +8,8 @@ use App\Entity\Sale;
 use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,11 +36,20 @@ class AdminPropertyController extends AbstractController
     /**
      * @Route("/admin", name="admin.property.index")
      * @return Response
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function index(): Response
     {
         $properties = $this->repository->findAll();
-        return $this->render('admin/property/index.html.twig', compact('properties'));
+        $count = $this->repository->count_all();
+        array_push($count,$this->repository->count_all_sale());
+        array_push($count,$this->repository->count_all_rental());
+        array_push($count,$this->repository->count_unavailable());
+        return $this->render('admin/property/index.html.twig', [
+            'properties' => $properties,
+            'count' => $count
+        ]);
     }
 
     /**
