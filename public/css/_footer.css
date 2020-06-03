@@ -1,0 +1,28 @@
+footer {
+    background-color: #161616 !important;
+    bottom: 0;
+    width: 100%; }
+footer h5 {
+    text-align: left;
+    font-size: 20px;
+    letter-spacing: 0;
+    color: #FFFFFF;
+    opacity: 1;
+    padding-top: 5%;
+    padding-bottom: 2%; }
+footer h6 {
+    font-size: 15px; }
+footer ul li a {
+    color: #8B7D72 !important;
+    font-size: 10px; }
+footer i {
+    color: #7D0031;
+    margin-left: 3%; }
+footer p {
+    font-size: 19px;
+    text-align: left;
+    letter-spacing: 0;
+    color: #FFFFFF;
+    opacity: 1; }
+footer .p-5 {
+    margin-top: 10%; }

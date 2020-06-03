@@ -1,52 +1,111 @@
 {% extends 'base.html.twig' %}
 {% block title property.name %}
 {% block body %}
-    <div class="container mt-4">
-       <div class="row">
-           <div class="col-md-8">
-
-           </div>
-           <div class="col-md-4">
-               <h1>{{ property.name }}</h1>
-               <h2>{{ property.rooms }} piéces  - {{ property.surface }} m²</h2>
-               <a href="#" class="btn btn-info">Contacter l'agence</a>
-           </div>
-
-           <p>
-               {{ property.description | nl2br }}
-           </p>
-
-           <div class="row">
-               <div class="col-md-8">
-                   <h2>Caractéristiques</h2>
-                   <table class="table-striped">
-                       <tr>
-                           <td>Surface habitable</td>
-                           <td>{{ property.surface }}</td>
-                       </tr>
-                       <tr>
-                           <td>Surface du terrain</td>
-                           <td>{{ property.surfaceTer }}</td>
-                       </tr>
-                       <tr>
-                           <td>Nombre de piéces</td>
-                           <td>{{ property.rooms }}</td>
-                       </tr>
-                       <tr>
-                           <td>Nombre de chambre</td>
-                           <td>{{ property.bedrooms }}</td>
-                       </tr>
-                       <tr>
-                           <td>Classe énergitique</td>
-                           <td>{{ property.surface }}</td>
-                       </tr>
-                   </table>
-               </div>
-               <div class="col-md-4">
-                   <h2>Spécificité</h2>
-               </div>
-           </div>
-       </div>
+    <div class="container-fluid">
+        {%  for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% if not form.vars.valid %}
+            <div class="aler alert-danger">
+                Vous avez commis une erreur en remplissant le formulaire veuillez la modifier avant de le renvoyer!
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-8 px-0 mt-0">
+                <div class="menu">
+                    <a href="{{ path('property.index') }}" class="btn btn-danger float-left "><i class="fas fa-arrow-left" style="font-size: 20px;"></i> Précédent</a>
+                </div>
+                {%  if property.filename %}
+                    <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium') }}" alt="" class="card-img-top">
+                {% else %}
+                    <img src="{{ '/images/empty.jpg' | imagine_filter('medium') }}" alt="" class="card-img-top">
+                {% endif %}
+            </div>
+            <div class="col-md-4 ">
+                    <h2 class="text-center mb-3">Caractéristiques</h2>
+                <div class="table-responsive">
+                    <table class="table  table-striped">
+                        <tr>
+                            <td>Surface habitable</td>
+                            <td>{{ property.surface }} m²</td>
+                        </tr>
+                        <tr>
+                            <td>Surface du terrain</td>
+                            <td>{{ property.surfaceTer }} m²</td>
+                        </tr>
+                        <tr>
+                            <td>Type de Chaufage </td>
+                            <td>{{ heat[property.heat] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Classe énergitique</td>
+                            <td>{{ energy[property.energyClass] }}</td>
+                        </tr>
+                    </table>
+                </div>
+                {% if property.options is not empty %}
+                <h2 class="text-center mb-3">Les options </h2>
+                <ul class="list-group">
+                    {% for option in property.options %}
+                        <li class="list-group-item"> {{ option.name }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <a href="#" class="btn btn-info float-right mb-4">Contacter l'agence</a>
+                <div id="contactForm" class="mt-5 container">
+                    {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col">{{ form_row(form.firstname) }}</div>
+                            <div class="col">{{ form_row(form.lastname) }}</div>
+                        </div>
+                        <div class="row">
+                        <div class="col">{{ form_row(form.phone) }}</div>
+                        <div class="col">{{ form_row(form.email) }}</div>
+                    </div>
+                        {{ form_rest(form) }}
+                    <div class="form-group">
+                        <button class="btn btn-primary">Envoyer</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                <p class="mt-5"> Déscription : <br>{{ property.description | nl2br }}</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-1">
+                            <img src="{{ '/images/left.png' | imagine_filter('medium') }}" alt="energy class" class="mb-3 mt-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 jumbotron py-4 mb-0" style="background-color: #161616;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 offset-md-2">
+                            <p class="text-white font-weight-bold">{{ property.name }}</p>
+                            <p class="text-white">{{ property.FormatPrice }} €{% if property.type == 0 %} TTC {% else %} Par mois {% endif %}</p>
+                        </div>
+                        <div class="col-md-6 text-center text-white">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <i class="fas fa-chart-area"></i>
+                                    <p>Surfaces <br> {{ property.surface }} m²</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <i class="fas fa-bed"></i>
+                                    <p>Chambres <br> {{ property.bedrooms }}</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <i class="fas fa-home"></i>
+                                    <p>Piéces <br> {{ property.rooms }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 

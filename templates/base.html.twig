@@ -7,25 +7,23 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
-    </head>
+        <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+        <link rel="stylesheet" href="/css/themify-icons.css" type="text/css">
+        <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+        <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+        <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/style.css" type="text/css">
+        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
         {% block stylesheets %}{% endblock %}
+    </head>
     <body>
-    {% if (app.request.attributes.get('_route')  == "home") %}
-        {% include('partials/_homeNav.html.twig') %}
-    {% else %}
-        {% include('partials/_nav.html.twig') %}
-    {% endif %}
+    {% include('partials/_nav.html.twig') %}
 
+    {% block body %}{% endblock %}
 
-        {% block body %}{% endblock %}
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
-    <script>
-        $('select').select2();
-    </script>
+    {% include 'partials/_footer.html.twig' %}
     {% block javascripts %}{% endblock %}
     </body>
 </html>

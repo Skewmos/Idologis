@@ -33,7 +33,7 @@ class Property
     private $id;
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $filename;
     /**
@@ -326,6 +326,11 @@ class Property
         $this->price = $price;
 
         return $this;
+    }
+
+    public function getFormatPrice(): string
+    {
+        return number_format($this->price, 0, '', ' ');
     }
 
     /**
