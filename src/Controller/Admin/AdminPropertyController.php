@@ -36,8 +36,6 @@ class AdminPropertyController extends AbstractController
     /**
      * @Route("/admin", name="admin.property.index")
      * @return Response
-     * @throws NoResultException
-     * @throws NonUniqueResultException
      */
     public function index(): Response
     {
