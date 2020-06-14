@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Configuration{% endblock %}
+
+{% block body %}
+    <h1>Configuration</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ configuration.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ configuration.title }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ configuration.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ configuration.phone }}</td>
+            </tr>
+            <tr>
+                <th>Filename</th>
+                <td>{{ configuration.filename }}</td>
+            </tr>
+            <tr>
+                <th>Style</th>
+                <td>{{ configuration.style }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('configuration_index') }}">back to list</a>
+
+    <a href="{{ path('configuration_edit', {'id': configuration.id}) }}">edit</a>
+
+    {{ include('configuration/_delete_form.html.twig') }}
+{% endblock %}

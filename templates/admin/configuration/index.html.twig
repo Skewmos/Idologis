@@ -1,0 +1,61 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %} Configuration{% endblock %}
+
+{% block body %}
+  <div class="container mt-5">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="text-right mb-4">
+                  <a href="{{ path('configuration_new') }}" class="btn btn-primary"><i class="fas fa-plus-square"></i> Créer une nouvelle configuration</a>
+              </div>
+              <h1>Configuration du site</h1>
+
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th>Id</th>
+                      <th>Title</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Filename</th>
+                      <th>Style</th>
+                      <th>actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for configuration in configurations %}
+                      <tr>
+                          <td>{{ configuration.id }}</td>
+                          <td>{{ configuration.title }}</td>
+                          <td>{{ configuration.email }}</td>
+                          <td>{{ configuration.phone }}</td>
+                          <td>{{ configuration.filename }}</td>
+                          <td>{{ configuration.style }}</td>
+                          <td>
+                              <a href="{{ path('configuration_show', {'id': configuration.id}) }}">show</a>
+                              <a href="{{ path('configuration_edit', {'id': configuration.id}) }}">edit</a>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <a href="{{ path('configuration_index', {id: configuration.id }) }}" class="btn btn-secondary"><i class="fas fa-edit"></i> Editer</a>
+                              <form method="post" action="{{ path('configuration_delete', {id: configuration.id}) }}" class="d-inline-block"
+                                    onsubmit="return confirm('Vous êtes sur le point de supprimer cette configuration ! êtes-vous sur de vouloir la supprimer? ')">
+                                  <input type="hidden" name="_method" value="DELETE">
+                                  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
+                                  <button class="btn btn-danger"><i class="fas fa-dumpster"></i> Supprimer</button>
+                              </form>
+                          </td>
+                      </tr>
+                  {% else %}
+                      <tr>
+                          <td colspan="7">Aucun enregistrement trouvé</td>
+                      </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+{% endblock %}
