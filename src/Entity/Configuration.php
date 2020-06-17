@@ -11,9 +11,17 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ConfigurationRepository::class)
+ * @Vich\Uploadable
  */
 class Configuration
 {
+    const STYLE = [
+        "Default" => "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css\">",
+        "darkly" =>"<link href=\"https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/darkly/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-Bo21yfmmZuXwcN/9vKrA5jPUMhr7znVBBeLxT9MA4r2BchhusfJ6+n8TLGUcRAtL\" crossorigin=\"anonymous\">",
+        "journal" => "<link href=\"https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/journal/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-vjBZc/DqIqR687k5rf6bUQ6IVSOxQUi9TcwtvULstA7+YGi//g3oT2qkh8W1Drx9\" crossorigin=\"anonymous\">",
+        "minty"  => "<link href=\"https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/minty/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-HqaYdAE26lgFCJsUF9TBdbZf7ygr9yPHtxtg37JshqVQi6CCAo6Qvwmgc5xclIiV\" crossorigin=\"anonymous\">",
+        "superhero" =>"<link href=\"https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/superhero/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-rvwYMW9Z/bbxZfgxHQEKx6D91KwffWAG+XnsoYNCGWi/qL1P9dIVYm1HBiHFqQEt\" crossorigin=\"anonymous\">"
+        ];
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -38,7 +46,8 @@ class Configuration
 
 
     /**
-     * @ORM\Column(type="integer")
+     * @var string|null
+     * @ORM\Column(type="string")
      */
     private $style;
 
@@ -47,10 +56,11 @@ class Configuration
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $filename;
+
     /**
      * @var File|null
      * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
-     * @Vich\UploadableField(mapping="configuration_image", fileNameConfiguration="filename")
+     * @Vich\UploadableField(mapping="configuration_image", fileNameProperty="filename")
      */
     private $imageFile;
 
@@ -109,7 +119,7 @@ class Configuration
         return $this;
     }
 
-    public function getStyle(): ?int
+    public function getStyle(): ?string
     {
         return $this->style;
     }
